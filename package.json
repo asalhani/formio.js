@@ -12,9 +12,7 @@
     "embed.js",
     "full.js"
   ],
-  "pre-commit": [
-    "lint"
-  ],
+  
   "scripts": {
     "build": "esdoc;gulp build",
     "rebuild": "rm -rf node_modules;npm install;gulp build",
