@@ -1,1 +1,2 @@
-xcopy "V:\ELM\ESP\formio.js\lib" "V:\ELM\ESP\formio_Playground\node_modules\formiojs\" /E /Y
+xcopy "C:\ASALHANI\ELM_PROJECTS\ESP_NEW\ESP Component\formio.js\lib" "C:\ASALHANI\ELM_PROJECTS\ESP_NEW\ESP Component\angular\node_modules\angular-formio\node_modules\formiojs\" /E /Y
+xcopy "C:\ASALHANI\ELM_PROJECTS\ESP_NEW\ESP Component\formio.js\lib" "C:\ASALHANI\ELM_PROJECTS\ESP_NEW\ESP Component\formio_Playground\node_modules\formiojs\" /E /Y
