@@ -104,6 +104,10 @@ gulp.task('dist', () => gulp.src(['dist/**/*.*']).pipe(gulp.dest('lib/dist')));
 // Watch for changes.
 gulp.task('watch', () => gulp.watch(['./src/**.js', './src/*/**.js'], ['formio.full.js']));
 
+gulp.task('copy-vendors-files',() =>{
+  gulp.src(['./assests/datepicker/**/*']).pipe(gulp.dest('lib/vendor'));
+});
+
 // Create a new build.
 gulp.task('build', gulpsync.sync([['clean'], 'babel', 'package-version', [
   // 'icons',
@@ -115,7 +119,8 @@ gulp.task('build', gulpsync.sync([['clean'], 'babel', 'package-version', [
   // 'scripts-embed',
   // 'scripts-contrib',
   'scripts-form',
-  'scripts-full'
+  'scripts-full',
+  'copy-vendors-files'
 ], 'dist']));
 
 // Default task. Build and watch.

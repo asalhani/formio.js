@@ -1,6 +1,6 @@
 import BaseComponent from '../base/Base';
 import _ from 'lodash';
-import {jQuery as $} from 'jquery';
+var $ = jQuery.noConflict();
 
 export default class DatepickerComponent extends BaseComponent {
   static schema(...extend) {
@@ -226,6 +226,7 @@ export default class DatepickerComponent extends BaseComponent {
     // for complete configuarion options, visit: http://keith-wood.name/calendarsPicker.html
 
     lang = 'en';
+    console.log($(this.dateInput));
 
     return {
       calendar: $.calendars.instance(calendarType, lang),
