@@ -115,7 +115,7 @@ gulp.task('build', gulpsync.sync([['clean'], 'babel', 'package-version', [
   // 'styles-builder',
   // 'styles-full',
   'scripts-formio',
-  'scripts-utils',
+  //'scripts-utils',
   // 'scripts-embed',
   // 'scripts-contrib',
   'scripts-form',

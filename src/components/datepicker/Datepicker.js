@@ -2,13 +2,23 @@ import BaseComponent from '../base/Base';
 import _ from 'lodash';
 var $ = jQuery.noConflict();
 
+export class DateResult {
+  constructor(calendarType, date) {
+    this.calendarType = calendarType;
+    this.date = date;
+  }
+}
 export default class DatepickerComponent extends BaseComponent {
+
+  constructor(component, options, data) {
+    super(component, options, data);
+  }
+
   static schema(...extend) {
     return BaseComponent.schema({
       type: 'datepicker',
+      label: 'Datepicker',
       key: 'datepicker',
-      input: false,
-      html: '',
       fields: {
         calendarType: {
           label: 'Calendar Type',
@@ -17,7 +27,7 @@ export default class DatepickerComponent extends BaseComponent {
           required: true
         },
         date: {
-          label: 'dsfds',
+          label: 'Date',
           type: 'textfield',
           placeholder: '',
           required: true
@@ -30,11 +40,19 @@ export default class DatepickerComponent extends BaseComponent {
     return {
       title: 'Datepicker',
       group: 'advanced',
-      icon: 'fa fa-html5',
+      icon: 'fa fa-plus-square',
       documentation: 'http://help.form.io/userguide/#content-component',
       weight: 100,
       schema: DatepickerComponent.schema()
     };
+  }
+
+  elementInfo() {
+    const info = super.elementInfo();
+    info.type = 'input';
+    info.attr.type = 'hidden';
+    info.changeEvent = 'change';
+    return info;
   }
 
   get defaultSchema() {
@@ -126,6 +144,8 @@ export default class DatepickerComponent extends BaseComponent {
 
       // set calendar to the selected type
       self.createCalendar(self.getCalendarConfig(self.calendarTypeInput.value, 'en'));
+
+      self.updateValue();
     };
 
     calendarTypeInputWrapper.appendChild(this.calendarTypeInput);
@@ -223,21 +243,29 @@ export default class DatepickerComponent extends BaseComponent {
   }
 
   getCalendarConfig(calendarType, lang) {
+    /*
     // for complete configuarion options, visit: http://keith-wood.name/calendarsPicker.html
+    */
 
     lang = 'en';
-    console.log($(this.dateInput));
 
+    // based on user selection, check if user can select date in feature or not
+    const maxDate = this.component.allowFeatureDate ? null : 0;
+
+    const self = this;
     return {
       calendar: $.calendars.instance(calendarType, lang),
       firstDay: 0, // 0 = sunday, 1 = monday, ....
       dateFormat: 'dd/mm/yyyy',
       rangeSelect: false,
-      monthsToShow: 1,
+      monthsToShow: this.component.numberOfMonthesToShow ? this.component.numberOfMonthesToShow : 1,
+      maxDate: maxDate,
       onSelect: date => {
+        self.updateValue();
         console.log(date);
       },
       onClose: () => {
+
         console.log("closed");
       }
     };
@@ -250,7 +278,56 @@ export default class DatepickerComponent extends BaseComponent {
     $(this.dateInput).calendarsPicker(config);
   }
 
+  getDateValue() {
+    return $(this.dateInput).val();
+  }
+
+  setDateValue(dateText) {
+    if (!dateText) {
+      return null;
+    }
+
+    $(this.dateInput).calendarsPicker('setDate', dateText);
+  }
+
   get emptyValue() {
     return '';
   }
+
+  get dateInfo() {
+    const date = new DateResult(this.calendarTypeInput.value, this.getDateValue());
+
+    // retun null if date vlaue was not set
+    // if (!date || !date.calendarType || !date.date) {
+    //   return null;
+    // }
+
+    return date;
+  }
+
+  // getView() {
+  //   debugger;
+  // }
+
+  setValueAt(index, value) {
+    if (!value) {
+      return null;
+    }
+    this.calendarTypeInput.value = value.calendarType;
+    this.setDateValue(value.date);
+
+    // write code to fill controls in case there is aa value passed.
+  }
+  getValueAt(index) {
+    const date = this.dateInfo;
+    if (date) {
+      this.inputs[index].value = date;
+      return date;
+    }
+    else {
+      this.inputs[index].value = null;
+      return null;
+    }
+  }
+
 }
