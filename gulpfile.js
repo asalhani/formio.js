@@ -82,9 +82,9 @@ gulp.task('scripts-contrib', build('contrib/index.js', 'formio.contrib.js'));
 
 // ESLint
 gulp.task('eslint', () => gulp.src(['./src/**/*.js', '!./src/**/*.spec.js'])
-  .pipe(plugins.eslint())
-  .pipe(plugins.eslint.format())
-  .pipe(plugins.eslint.failAfterError())
+  // .pipe(plugins.eslint())
+  // .pipe(plugins.eslint.format())
+  // .pipe(plugins.eslint.failAfterError())
 );
 
 // Copy the version and dependencies into the distribution package.json file.
@@ -106,14 +106,14 @@ gulp.task('watch', () => gulp.watch(['./src/**.js', './src/*/**.js'], ['formio.f
 
 // Create a new build.
 gulp.task('build', gulpsync.sync([['clean'], 'babel', 'package-version', [
-  'icons',
-  'styles-form',
-  'styles-builder',
-  'styles-full',
+  // 'icons',
+  // 'styles-form',
+  // 'styles-builder',
+  // 'styles-full',
   'scripts-formio',
   'scripts-utils',
-  'scripts-embed',
-  'scripts-contrib',
+  // 'scripts-embed',
+  // 'scripts-contrib',
   'scripts-form',
   'scripts-full'
 ], 'dist']));

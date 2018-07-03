@@ -1,3 +1,42 @@
+  # ELM Notes
+  Clone this repository only in case you want to add features to the formio.js library or you discovered an issue in the library and you want to fix it. Otherwise, no need to clone it.
+
+## Clone Formio.js Library and Connect it to the library's GitHub repo:
+Use the below instructions to clone the library in your workspace and connect it to the remote GitHub repo in order to keep this repo updated with all the changes from the original publisher.
+### 
+
+> Note: This step should be performed only by someone who is
+> responsiable about keeping this repo updated with GitHub. The normal
+> user should only clone the repo to thier own machine and keep pulling
+> ``` master ``` branch for any changes
+
+ 1. Clone formio.js repo (this repo) into your own workspace:
+
+> ``` git clone git clone <YOUR_BITBUCKET_URL>/scm/pc/formiojs.git ```
+
+ 2. Add formiojs GitHub repo as a new remote in Bitbucket called "**sync**"
+>```git remote add sync https://github.com/formio/formio.js.git ```
+
+ 3. Verify what are the remotes currently being setup for "formiojs" Bitbucket repo. This following command should show "fetch" and "push" for two remotes i.e. "origin" and "sync"
+
+> ``` git remote -v ```
+
+ 4. Do a ```pull``` from the ```master``` branch in the ```sync``` remote to clone the GitHub project locally:
+>``` git pull sync master ```
+
+ 5. Setup a local branch called ```GitHub``` that tracks the ```sync``` remote's ```master``` branch:
+>``` git branch --track github sync/master ```
+
+ 6. Push the local ```master``` branch to the ```origin``` remote in Bitbucket (this repo):
+>```git push -u origin master ```
+
+**If you want to pull the latest changes from GitHub repo into this repo, follow the below steps:**
+
+ 1. Checkout ``` Github ``` branch:
+ > ``` git checkout github ```
+ 2. Run merge command from ``` sync/github ```
+ > git merge sync/github
+ 
 # JavaScript powered forms and SDK for Form.io
 This library is a plain JavaScript form renderer and SDK for Form.io. This allows you to render the JSON schema forms produced by Form.io and render those within your application using plain JavaScript, as well as provides an interface SDK to communicate to the Form.io API's. The benefits of this library include.
 

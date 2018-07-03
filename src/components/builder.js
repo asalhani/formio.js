@@ -34,6 +34,7 @@ import SelectboxesForm from './selectboxes/SelectBoxes.form';
 import SurveyForm from './survey/Survey.form';
 import WellForm from './well/Well.form';
 import FileForm from './file/File.form';
+import DatepickerForm from './datepicker/Datepicker.form';
 
 Components.address.editForm = AddressForm;
 Components.content.editForm = ContentForm;
@@ -70,5 +71,5 @@ Components.selectboxes.editForm = SelectboxesForm;
 Components.survey.editForm = SurveyForm;
 Components.well.editForm = WellForm;
 Components.file.editForm = FileForm;
-
+Components.datepicker.editForm = DatepickerForm;
 export default Components;

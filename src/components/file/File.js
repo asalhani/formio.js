@@ -547,7 +547,7 @@ export default class FileComponent extends BaseComponent {
     }
   }
 
-  getFile(fileInfo, event) {
+ getFile(fileInfo, event) {
     const fileService = this.fileService;
     if (!fileService) {
       return alert('File Service not provided');
@@ -558,7 +558,9 @@ export default class FileComponent extends BaseComponent {
           download(file.url, file.originalName, file.type);
         }
         else {
-          window.open(file.url, '_blank');
+          fileService.makeRequest('', file.url, 'GET', null).then((response) => {
+            download(`data:${response.contentType};base64,${response.content}`, response.fileName, response.contentType);
+          });
         }
       }
     })
